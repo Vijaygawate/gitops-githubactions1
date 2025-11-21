@@ -67,10 +67,12 @@ jobs:
           repository: Vijaygawate/gitops-githubactions2
           ref: 'main'
           token: ${{ secrets.G_TOKEN }}
+          persist-credentials: false
       - name: setup git config
         run: |
           git config --global user.email "vijaygawate79@gmail.com"
           git config --global user.name "Vijaygawate"
+          git remote set-url origin https://x-access-token:${{ secrets.G_TOKEN }}@github.com/Vijaygawate/gitops-githubactions2.git
           echo ${{ github.sha }}
           sed -i "s#vijaygawate.*#vijaygawate/gitops01:${{ github.sha }}#g" deployment.yaml
           git add -A
